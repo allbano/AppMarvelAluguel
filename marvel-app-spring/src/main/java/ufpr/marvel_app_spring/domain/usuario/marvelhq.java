@@ -1,4 +1,4 @@
-package ufpr.marvel_app_spring.domain.entity;
+package ufpr.marvel_app_spring.domain.usuario;
 
 import java.time.LocalDate;
 
