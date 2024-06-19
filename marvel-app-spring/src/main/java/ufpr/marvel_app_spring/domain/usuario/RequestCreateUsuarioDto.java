@@ -1,5 +1,10 @@
 package ufpr.marvel_app_spring.domain.usuario;
 
-public record RequestUsuarioDto(String nome,String email, String senha, String telefone, String foto) {
+import jakarta.validation.constraints.NotBlank;
 
-}
+public record RequestCreateUsuarioDto(@NotBlank String nome, 
+								@NotBlank String email,
+								@NotBlank String senha,
+								@NotBlank String telefone,
+								String foto)
+{}

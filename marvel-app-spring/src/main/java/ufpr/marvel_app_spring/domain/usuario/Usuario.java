@@ -30,9 +30,50 @@ public class Usuario {
 	private String telefone;
 	@Column(name = "user_foto",nullable = true)
 	private String foto;
+	@Column(nullable = false)
+	private Boolean active;
+	
+	
+	public Usuario(RequestCreateUsuarioDto requestUsuarioDto) {
+		this.nome = requestUsuarioDto.nome();
+		this.email = requestUsuarioDto.email();
+		this.senha = requestUsuarioDto.senha();
+		this.telefone = requestUsuarioDto.telefone();
+		this.foto = requestUsuarioDto.foto();
+		this.active = true;
+	}
+
+
+	public Long getId() { return this.id; }
+	public String getNome() { return this.nome; }
+	public String getEmail() { return this.email; }
+	public String getSenha() { return this.senha; }
+	public String getTelefone() { return this.telefone; }
+	public String getFoto() { return this.foto; }
+	public Boolean getActive() { return this.active;}
+
+
+	public void setId(Long id) { this.id = id; }
+	public void setNome(String nome) { this.nome = nome; }
+	public void setEmail(String email) { this.email = email; }
+	public void setSenha(String senha) { this.senha = senha; } 
+	public void setTelefone(String telefone) { this.telefone = telefone; }
+	public void setFoto(String foto) { this.foto = foto; }
+	public void setActive(boolean b) { this.active = b; }
+
+	@Override
+	public String toString() {
+		return "Usuario [id=" + id + ", nome=" + nome + ", email=" + email + ", senha=" + senha + ", telefone="
+				+ telefone + ", foto=" + foto + "]";
+	}
 
 
 	
 	
+	
+	
+	
+
+
 	
 }
