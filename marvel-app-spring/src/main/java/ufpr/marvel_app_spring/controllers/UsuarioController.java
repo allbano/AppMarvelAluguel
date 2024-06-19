@@ -80,6 +80,7 @@ public class UsuarioController {
                 .buildAndExpand(novoUsuario.getId()).toUri();
 		return ResponseEntity.created(location).body(novoUsuario);		
 	}
+    
     @Operation(description = "Operação para alterar e persistir um usuário.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Usuário atualizado com sucesso."),
@@ -104,16 +105,24 @@ public class UsuarioController {
     			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     		}
 	}
+    
+    @Operation(description = "Operação para deletar um usuário.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "204", description = "Usuário deletado com sucesso."),
+            @ApiResponse(responseCode = "404", description = "Usuário não encontrado."),
+            @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
+    })
 	@DeleteMapping("/{id}")
+    @Transactional
 	public ResponseEntity<?> deleteUser(@PathVariable Long id) {
 		//repository.deleteById(id);
 		Optional<Usuario> optionalUser = repository.findById(id);
 		if (optionalUser.isPresent()) {
 			Usuario updateUsuario = optionalUser.get();
 			updateUsuario.setActive(false);
-			return ResponseEntity.ok(updateUsuario);
+			return ResponseEntity.noContent().build();
 		} else {
-			return ResponseEntity.notFound().build();
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 		}	
 	}
 
