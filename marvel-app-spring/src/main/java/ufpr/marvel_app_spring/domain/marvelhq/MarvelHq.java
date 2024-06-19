@@ -1,4 +1,4 @@
-package ufpr.marvel_app_spring.domain.usuario;
+package ufpr.marvel_app_spring.domain.marvelhq;
 
 import java.time.LocalDate;
 
@@ -16,7 +16,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(of = "id")
-public class marvelhq {
+public class MarvelHq {
 	
 	@Id 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,8 +28,6 @@ public class marvelhq {
 	private String imagem;
 	@Column(name = "hq_data_devolucao")
 	private LocalDate data_devolucao;
-	
-	@ManyToOne
-	private Usuario user;
+
 
 }
