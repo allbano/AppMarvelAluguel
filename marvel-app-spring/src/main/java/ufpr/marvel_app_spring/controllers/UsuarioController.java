@@ -80,21 +80,29 @@ public class UsuarioController {
                 .buildAndExpand(novoUsuario.getId()).toUri();
 		return ResponseEntity.created(location).body(novoUsuario);		
 	}
+    @Operation(description = "Operação para alterar e persistir um usuário.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Usuário atualizado com sucesso."),
+            @ApiResponse(responseCode = "204", description = "Indica que a atualização foi bem-sucedida, mas não há conteúdo para retornar"),
+            @ApiResponse(responseCode = "404", description = "Usuário não encontrado."),
+            @ApiResponse(responseCode = "417", description = "Algum erro de validação de dados ocorreu"),
+            @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
+    })
 	@PutMapping()
 	@Transactional
 	public ResponseEntity<?> updateUser(@RequestBody @Valid RequestUpdateUsuarioDto data) {
-		Optional<Usuario> optionalUser = repository.findById(data.id());
-		if (optionalUser.isPresent()) {
-			Usuario updateUsuario = optionalUser.get();
-			updateUsuario.setNome(data.nome());
-			updateUsuario.setEmail(data.email());
-			updateUsuario.setSenha(data.senha());
-			updateUsuario.setTelefone(data.telefone());
-			updateUsuario.setFoto(data.foto());
-			return ResponseEntity.ok(updateUsuario);
-		} else {
-			return ResponseEntity.notFound().build();
-		}	
+       		Optional<Usuario> optionalUser = repository.findById(data.id());
+    		if (optionalUser.isPresent()) {
+    			Usuario updateUsuario = optionalUser.get();
+    			updateUsuario.setNome(data.nome());
+    			updateUsuario.setEmail(data.email());
+    			updateUsuario.setSenha(data.senha());
+    			updateUsuario.setTelefone(data.telefone());
+    			updateUsuario.setFoto(data.foto());
+    			return ResponseEntity.ok(updateUsuario);
+    		}	else {
+    			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+    		}
 	}
 	@DeleteMapping("/{id}")
 	public ResponseEntity<?> deleteUser(@PathVariable Long id) {
