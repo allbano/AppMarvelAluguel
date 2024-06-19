@@ -33,7 +33,7 @@ public class Usuario {
 	@Column(nullable = false)
 	private Boolean active;
 	
-	
+	public Usuario() {}
 	public Usuario(RequestCreateUsuarioDto requestUsuarioDto) {
 		this.nome = requestUsuarioDto.nome();
 		this.email = requestUsuarioDto.email();
