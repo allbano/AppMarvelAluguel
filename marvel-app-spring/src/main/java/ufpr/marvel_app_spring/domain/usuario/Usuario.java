@@ -11,8 +11,8 @@ import lombok.Setter;
 @Table(name="usuarios")
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode(of = "id")
 public class Usuario {
 	
@@ -33,7 +33,7 @@ public class Usuario {
 	@Column(nullable = false)
 	private Boolean active;
 	
-	public Usuario() {}
+	//public Usuario() {}
 	public Usuario(RequestCreateUsuarioDto requestUsuarioDto) {
 		this.nome = requestUsuarioDto.nome();
 		this.email = requestUsuarioDto.email();

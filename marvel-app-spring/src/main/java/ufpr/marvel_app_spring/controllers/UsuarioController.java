@@ -1,7 +1,10 @@
 package ufpr.marvel_app_spring.controllers;
 
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.EntityManager;
 import jakarta.validation.Valid;
+import lombok.extern.slf4j.Slf4j;
 
 import java.net.URI;
 import java.util.Optional;
@@ -20,12 +23,15 @@ import ufpr.marvel_app_spring.domain.usuario.RequestCreateUsuarioDto;
 import ufpr.marvel_app_spring.domain.usuario.RequestUpdateUsuarioDto;
 import ufpr.marvel_app_spring.domain.usuario.Usuario;
 import ufpr.marvel_app_spring.domain.usuario.UsuarioRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-
+@Slf4j
 @RestController
 @RequestMapping("/v1/usuarios")
 public class UsuarioController {
 	
+	Logger logger = LoggerFactory.getLogger(UsuarioController.class);
 	@Autowired
 	private UsuarioRepository repository;
 	
@@ -75,10 +81,19 @@ public class UsuarioController {
     })
 	@PostMapping()
 	public ResponseEntity<?> createUser(@RequestBody @Valid RequestCreateUsuarioDto data) {
-		Usuario novoUsuario = new Usuario(data);
-		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-                .buildAndExpand(novoUsuario.getId()).toUri();
-		return ResponseEntity.created(location).body(novoUsuario);		
+    	try {
+            Usuario novoUsuario = new Usuario(data);
+            Usuario savedUsuario = repository.save(novoUsuario);
+            
+            URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+                    .buildAndExpand(savedUsuario.getId()).toUri();
+            return ResponseEntity.created(location).body(savedUsuario);   
+        } catch (Exception e) {
+            // Captura a exceção e trata o erro
+            // Exemplo:
+            logger.error("Erro ao salvar usuário: " + e.getMessage());
+            return ResponseEntity.badRequest().build();
+        }	
 	}
     
     @Operation(description = "Operação para alterar e persistir um usuário.")
