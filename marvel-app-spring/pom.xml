@@ -56,14 +56,6 @@
 	    <groupId>org.slf4j</groupId>
 	    <artifactId>slf4j-api</artifactId>
 	</dependency>
-	<!-- https://mvnrepository.com/artifact/io.github.cdimascio/dotenv-java -->
-	<dependency>
-	    <groupId>io.github.cdimascio</groupId>
-	    <artifactId>dotenv-java</artifactId>
-	    <version>3.0.0</version>
-	</dependency>
-
-
     <dependency>
       <groupId>org.flywaydb</groupId>
       <artifactId>flyway-core</artifactId>
