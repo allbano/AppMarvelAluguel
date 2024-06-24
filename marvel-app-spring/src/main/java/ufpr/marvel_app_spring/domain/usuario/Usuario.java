@@ -7,12 +7,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+
 @Entity(name="usuarios")
 @Table(name="usuarios")
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @EqualsAndHashCode(of = "id")
 public class Usuario {
 	
@@ -33,7 +34,6 @@ public class Usuario {
 	@Column(nullable = false)
 	private Boolean active;
 	
-	//public Usuario() {}
 	public Usuario(RequestCreateUsuarioDto requestUsuarioDto) {
 		this.nome = requestUsuarioDto.nome();
 		this.email = requestUsuarioDto.email();
@@ -42,38 +42,32 @@ public class Usuario {
 		this.foto = requestUsuarioDto.foto();
 		this.active = true;
 	}
+//	public Usuario() {}
+//
+//
+//	public Long getId() { return this.id; }
+//	public String getNome() { return this.nome; }
+//	public String getEmail() { return this.email; }
+//	public String getSenha() { return this.senha; }
+//	public String getTelefone() { return this.telefone; }
+//	public String getFoto() { return this.foto; }
+//	public Boolean getActive() { return this.active;}
+//
+//
+//	public void setId(Long id) { this.id = id; }
+//	public void setNome(String nome) { this.nome = nome; }
+//	public void setEmail(String email) { this.email = email; }
+//	public void setSenha(String senha) { this.senha = senha; } 
+//	public void setTelefone(String telefone) { this.telefone = telefone; }
+//	public void setFoto(String foto) { this.foto = foto; }
+//	public void setActive(boolean b) { this.active = b; }
 
 
-	public Long getId() { return this.id; }
-	public String getNome() { return this.nome; }
-	public String getEmail() { return this.email; }
-	public String getSenha() { return this.senha; }
-	public String getTelefone() { return this.telefone; }
-	public String getFoto() { return this.foto; }
-	public Boolean getActive() { return this.active;}
-
-
-	public void setId(Long id) { this.id = id; }
-	public void setNome(String nome) { this.nome = nome; }
-	public void setEmail(String email) { this.email = email; }
-	public void setSenha(String senha) { this.senha = senha; } 
-	public void setTelefone(String telefone) { this.telefone = telefone; }
-	public void setFoto(String foto) { this.foto = foto; }
-	public void setActive(boolean b) { this.active = b; }
 
 	@Override
 	public String toString() {
 		return "Usuario [id=" + id + ", nome=" + nome + ", email=" + email + ", senha=" + senha + ", telefone="
 				+ telefone + ", foto=" + foto + "]";
 	}
-
-
-	
-	
-	
-	
-	
-
-
 	
 }

@@ -1,6 +1,6 @@
 package ufpr.marvel_app_spring.domain.marvelhq;
 
-import java.time.LocalDate;
+
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -11,36 +11,40 @@ import lombok.Setter;
 
 @Entity(name="marvelhq")
 @Table(name="marvelhq")
-@Getter
 @Setter
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(of = "id")
 public class MarvelHq {
 	
-	@Id 
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id
 	@Column(name = "hq_id",nullable = false)
 	private Long id;
 	@Column(name = "hq_titulo",nullable = false)
 	private String titulo;
 	@Column(name = "hq_imagem",nullable = false)
 	private String imagem;
-	@Column(name = "hq_data_devolucao",nullable = false)
-	private LocalDate data_devolucao;
 
-	public MarvelHq(RequestCreateMarvelHqDto requestMarvelHqDto) {
-		this.titulo = requestMarvelHqDto.titulo();
-		this.imagem = requestMarvelHqDto.imagem();
-		this.data_devolucao = requestMarvelHqDto.dataDevolucao();
-		
-	}
-
+//	public MarvelHq() {}
+//	public MarvelHq(Long id, String titulo, String imagem) { this.id = id; this.titulo = titulo; this.imagem = imagem; }
+//	
+//	public Long getId() { return id; }
+//	public String getTitulo() { return titulo; }
+//	public String getImagem() { return imagem; }
+//	
+//	public void setId(Long id) { this.id = id; }
+//	public void setTitulo(String titulo) { this.titulo = titulo; }
+//	public void setImagem(String imagem) { this.imagem = imagem; }
+	
+	
+	
 	@Override
 	public String toString() {
-		return "MarvelHq [id=" + id + ", titulo=" + titulo + ", imagem=" + imagem + ", data_devolucao=" + data_devolucao
-				+ "]";
+		return "MarvelHq [id=" + id + ", titulo=" + titulo + ", imagem=" + imagem + "]";
 	}
+
+
 	
 	
 }
