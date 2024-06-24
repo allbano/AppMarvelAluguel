@@ -1,9 +1,10 @@
 package ufpr.marvel_app_spring.domain.usuario;
 
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 
 public record RequestCreateUsuarioDto(@NotBlank String nome, 
-								@NotBlank String email,
+								@NotBlank @Email String email,
 								@NotBlank String senha,
 								@NotBlank String telefone,
 								String foto)

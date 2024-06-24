@@ -7,6 +7,7 @@ import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 
 import java.net.URI;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,7 +45,7 @@ public class UsuarioController {
 	public ResponseEntity<?> getAllUsers() {
 		try {
 	        // Busca todos os usuários ativos
-	        var usuarios = repository.findAllByActiveTrue();
+	        List<Usuario> usuarios = repository.findAllByActiveTrue();
 
 	        // Verifica se a lista de usuários está vazia
 	        if (usuarios.isEmpty()) {
