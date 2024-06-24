@@ -1,5 +1,9 @@
 package ufpr.marvel_app_spring.domain.usuario;
 
+import ufpr.marvel_app_spring.domain.aluguelhq.AluguelHq;
+
+import java.util.List;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -33,6 +37,8 @@ public class Usuario {
 	private String foto;
 	@Column(nullable = false)
 	private Boolean active;
+	
+
 	
 	public Usuario(RequestCreateUsuarioDto requestUsuarioDto) {
 		this.nome = requestUsuarioDto.nome();
