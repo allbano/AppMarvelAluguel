@@ -1,11 +1,7 @@
 package ufpr.marvel_app_spring.controllers;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.EntityManager;
 import jakarta.validation.Valid;
-import lombok.extern.slf4j.Slf4j;
-
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;
@@ -27,7 +23,7 @@ import ufpr.marvel_app_spring.domain.usuario.UsuarioRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@Slf4j
+
 @RestController
 @RequestMapping("/v1/usuarios")
 public class UsuarioController {
@@ -116,6 +112,7 @@ public class UsuarioController {
     			updateUsuario.setSenha(data.senha());
     			updateUsuario.setTelefone(data.telefone());
     			updateUsuario.setFoto(data.foto());
+    			//updateUsuario.setActive(data.active());
     			return ResponseEntity.ok(updateUsuario);
     		}	else {
     			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();

@@ -7,5 +7,6 @@ public record RequestUpdateUsuarioDto(@NotBlank Long id,
 		@NotBlank String email,
 		@NotBlank String senha,
 		@NotBlank String telefone,
-		String foto)
+		String foto,
+		@NotBlank boolean active)
 {}

@@ -1,9 +1,5 @@
 package ufpr.marvel_app_spring.domain.usuario;
 
-import ufpr.marvel_app_spring.domain.aluguelhq.AluguelHq;
-
-import java.util.List;
-
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -48,27 +44,6 @@ public class Usuario {
 		this.foto = requestUsuarioDto.foto();
 		this.active = true;
 	}
-//	public Usuario() {}
-//
-//
-//	public Long getId() { return this.id; }
-//	public String getNome() { return this.nome; }
-//	public String getEmail() { return this.email; }
-//	public String getSenha() { return this.senha; }
-//	public String getTelefone() { return this.telefone; }
-//	public String getFoto() { return this.foto; }
-//	public Boolean getActive() { return this.active;}
-//
-//
-//	public void setId(Long id) { this.id = id; }
-//	public void setNome(String nome) { this.nome = nome; }
-//	public void setEmail(String email) { this.email = email; }
-//	public void setSenha(String senha) { this.senha = senha; } 
-//	public void setTelefone(String telefone) { this.telefone = telefone; }
-//	public void setFoto(String foto) { this.foto = foto; }
-//	public void setActive(boolean b) { this.active = b; }
-
-
 
 	@Override
 	public String toString() {
