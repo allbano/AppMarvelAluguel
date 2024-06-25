@@ -2,20 +2,26 @@ package ufpr.marvel_app_spring.controllers;
 
 import java.net.URI;
 import java.time.LocalDate;
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import jakarta.validation.Valid;
 import ufpr.marvel_app_spring.domain.aluguelhq.AluguelHq;
+import ufpr.marvel_app_spring.domain.aluguelhq.AluguelHqComDetalhesDto;
+import ufpr.marvel_app_spring.domain.aluguelhq.AluguelHqComDetalhesViewRepository;
 import ufpr.marvel_app_spring.domain.aluguelhq.RequestCreateAluguelHqDto;
 import ufpr.marvel_app_spring.domain.marvelhq.MarvelHq;
 import ufpr.marvel_app_spring.domain.usuario.UsuarioRepository;
 import ufpr.marvel_app_spring.services.AluguelHqService;
 import ufpr.marvel_app_spring.services.MarvelHqService;
+
 
 
 @RestController
@@ -30,6 +36,31 @@ public class AluguelHqController {
 	private MarvelHqService marvelHqService;
 	@Autowired
 	private UsuarioRepository userRepository;
+	@Autowired
+	private AluguelHqComDetalhesViewRepository aluguelDtoRepository;
+	
+	@GetMapping("/list/{id}")
+	public ResponseEntity<?> getAllAlugueisUsuario(@PathVariable Long id) {
+		try {
+	        // Busca todos os usuários ativos
+	        List<AluguelHqComDetalhesDto> alugueis = aluguelDtoRepository.findByUsuarioId(id);
+
+	        // Verifica se a lista de usuários está vazia
+	        if (alugueis.isEmpty()) {
+	            // Retorna 204 No Content se não houver usuários ativos
+	            return ResponseEntity.noContent().build();
+	        } else {
+	            // Retorna 200 OK com a lista de usuários ativos
+	            return ResponseEntity.ok(alugueis);
+	        }
+	    } catch (Exception e) {
+	        // Em caso de erro, retorna 500 Internal Server Error com a mensagem de erro
+	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+	                             .body("Ocorreu um erro ao buscar os usuários: " + e.getMessage());
+	    }	
+	}
+	
+	
 	
 	@PostMapping
 	public ResponseEntity<?> createAluguel(@RequestBody @Valid RequestCreateAluguelHqDto data) {
