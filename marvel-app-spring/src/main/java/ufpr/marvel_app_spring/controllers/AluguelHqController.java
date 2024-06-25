@@ -16,6 +16,7 @@ import jakarta.validation.Valid;
 import ufpr.marvel_app_spring.domain.aluguelhq.AluguelHq;
 import ufpr.marvel_app_spring.domain.aluguelhq.AluguelHqComDetalhesDto;
 import ufpr.marvel_app_spring.domain.aluguelhq.AluguelHqComDetalhesViewRepository;
+import ufpr.marvel_app_spring.domain.aluguelhq.AluguelHqRepository;
 import ufpr.marvel_app_spring.domain.aluguelhq.RequestCreateAluguelHqDto;
 import ufpr.marvel_app_spring.domain.marvelhq.MarvelHq;
 import ufpr.marvel_app_spring.domain.usuario.UsuarioRepository;
@@ -38,6 +39,8 @@ public class AluguelHqController {
 	private UsuarioRepository userRepository;
 	@Autowired
 	private AluguelHqComDetalhesViewRepository aluguelDtoRepository;
+	@Autowired
+	private AluguelHqRepository aluguelHqRepository;
 	
 	@GetMapping("/list/{id}")
 	public ResponseEntity<?> getAllAlugueisUsuario(@PathVariable Long id) {
@@ -86,6 +89,17 @@ public class AluguelHqController {
 			// TODO: handle exception
 			logger.error("Erro ao salvar AluguelHq: " + e.getMessage());
             return ResponseEntity.badRequest().build();
+		}
+	}
+	
+	@DeleteMapping("/{id}")
+	public ResponseEntity<?> deleteAluguel(@PathVariable Long id) {
+		
+		if(aluguelHqRepository.existsById(id)) {
+			aluguelHqRepository.deleteById(id);
+			return ResponseEntity.noContent().build();
+		} else {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 		}
 	}
 
