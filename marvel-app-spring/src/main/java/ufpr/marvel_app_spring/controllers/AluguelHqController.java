@@ -12,6 +12,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 import ufpr.marvel_app_spring.domain.aluguelhq.AluguelHq;
 import ufpr.marvel_app_spring.domain.aluguelhq.AluguelHqComDetalhesDto;
@@ -42,6 +45,12 @@ public class AluguelHqController {
 	@Autowired
 	private AluguelHqRepository aluguelHqRepository;
 	
+	
+	@Operation(description = "Operação para listar todos os alugueis de um determinado usuário.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Aluguéis obtidos com sucesso"),
+            @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
+    })
 	@GetMapping("/list/{id}")
 	public ResponseEntity<?> getAllAlugueisUsuario(@PathVariable Long id) {
 		try {
@@ -64,7 +73,12 @@ public class AluguelHqController {
 	}
 	
 	
-	
+	@Operation(description = "Operação para persistir um aluguel de Hq.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Usuário salvo com sucesso"),
+            @ApiResponse(responseCode = "417", description = "Algum erro de validação de dados ocorreu"),
+            @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
+    })
 	@PostMapping
 	public ResponseEntity<?> createAluguel(@RequestBody @Valid RequestCreateAluguelHqDto data) {
 	
@@ -91,7 +105,12 @@ public class AluguelHqController {
             return ResponseEntity.badRequest().build();
 		}
 	}
-	
+	@Operation(description = "Operação para deletar/devolver um Hq alugado.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "204", description = "Hq devolvido com sucesso."),
+            @ApiResponse(responseCode = "404", description = "Aluguel não encontrado."),
+            @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
+    })
 	@DeleteMapping("/{id}")
 	public ResponseEntity<?> deleteAluguel(@PathVariable Long id) {
 		
